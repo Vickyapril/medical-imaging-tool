@@ -24,19 +24,23 @@ import cv2
 import numpy as np
 
 def segment_dicom(image):
-    """Allows interactive region selection and applies segmentation."""
+    """Applies segmentation, but skips interactive selection in headless mode."""
 
     if image.dtype != np.uint8:
         print("Converting image to uint8 for segmentation...")
         image = cv2.normalize(image, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
 
-    # Let the user select a region interactively
-    print("Select a region with your mouse and press ENTER to confirm.")
-    roi = cv2.selectROI("Select Region", image, fromCenter=False, showCrosshair=True)
-    cv2.destroyWindow("Select Region")
+    # Detect if running in headless mode (GitHub Actions or CI/CD)
+    is_headless = os.environ.get("CI") == "true"
 
-    x, y, w, h = map(int, roi)
-    print(f"Selected region: x={x}, y={y}, width={w}, height={h}")
+    if is_headless:
+        print("Running in headless mode: Skipping ROI selection")
+        x, y, w, h = 50, 50, 200, 200  # Default cropping values for CI/CD
+    else:
+        print("Select a region with your mouse and press ENTER to confirm.")
+        roi = cv2.selectROI("Select Region", image, fromCenter=False, showCrosshair=True)
+        cv2.destroyWindow("Select Region")
+        x, y, w, h = map(int, roi)
 
     # Crop the selected region
     cropped_image = image[y:y+h, x:x+w]

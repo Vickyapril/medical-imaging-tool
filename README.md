@@ -3,6 +3,15 @@
 🚀 **A Python-based DICOM Viewer & Segmentation Tool**  
 This application allows users to **upload, view, segment, and process** medical X-ray images in **2D and 3D**.  
 
+## 🛠️ Tech Stack
+Python 3.9 🐍
+PyQt5 (GUI)
+VTK (3D Visualization)
+OpenCV (Image Processing)
+Pydicom (DICOM Handling)
+GitHub Actions (CI/CD)
+
+
 ## 🌟 Features  
 ✅ Load **single or series DICOM files**  
 ✅ View images **in 2D or 3D (VTK rendering)**  
@@ -45,3 +54,5 @@ pip install -r requirements.txt
 Run the Application
 
 python app/gui.py
+
+

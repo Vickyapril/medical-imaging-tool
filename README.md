@@ -20,6 +20,10 @@ This application allows users to **upload, view, segment, and process** medical 
 **3D Volume Rendering:**  
 ![3D Rendering](docs/3d_view.png)
 
+**Metadata:**  
+![MetaData](docs/metadata.png)
+
+
 ---
 
 ## 📥 **Installation & Setup**

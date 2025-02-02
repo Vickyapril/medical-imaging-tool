@@ -50,6 +50,59 @@ def segment_dicom(image):
 
     return segmented
 
+def get_dicom_metadata(filepath):
+    """Extracts metadata from a DICOM file."""
+    dicom_img = pydicom.dcmread(filepath)
+    metadata = {
+        "Patient Name": dicom_img.get("PatientName", "Unknown"),
+        "Patient ID": dicom_img.get("PatientID", "Unknown"),
+        "Patient Age": dicom_img.get("PatientAge", "Unknown"),
+        "Patient Sex": dicom_img.get("PatientSex", "Unknown"),
+        "Study Date": dicom_img.get("StudyDate", "Unknown"),
+        "Study Time": dicom_img.get("StudyTime", "Unknown"),
+        "Modality": dicom_img.get("Modality", "Unknown"),
+        "Study Description": dicom_img.get("StudyDescription", "Unknown"),
+        "Institution": dicom_img.get("InstitutionName", "Unknown"),
+        "Manufacturer": dicom_img.get("Manufacturer", "Unknown"),
+        "Rows": dicom_img.get("Rows", "Unknown"),
+        "Columns": dicom_img.get("Columns", "Unknown"),
+        "Pixel Spacing": dicom_img.get("PixelSpacing", "Unknown"),
+        "Bits Allocated": dicom_img.get("BitsAllocated", "Unknown"),
+        "Bits Stored": dicom_img.get("BitsStored", "Unknown"),
+        "High Bit": dicom_img.get("HighBit", "Unknown"),
+        "Rescale Intercept": dicom_img.get("RescaleIntercept", "Unknown"),
+        "Rescale Slope": dicom_img.get("RescaleSlope", "Unknown"),
+    }
+    return metadata
+
+def get_dicom_series_metadata(directory):
+    """Extracts metadata from all DICOM files in a series folder."""
+    
+    metadata_list = []
+    
+    for filename in sorted(os.listdir(directory)):  # Ensure files are read in order
+        if filename.endswith(".dcm"):  
+            dicom_path = os.path.join(directory, filename)
+            dicom_img = pydicom.dcmread(dicom_path)
+            
+            metadata = {
+                "File Name": filename,
+                "Instance Number": dicom_img.get("InstanceNumber", "Unknown"),
+                "Slice Location": dicom_img.get("SliceLocation", "Unknown"),
+                "Patient ID": dicom_img.get("PatientID", "Unknown"),
+                "Study Date": dicom_img.get("StudyDate", "Unknown"),
+                "Modality": dicom_img.get("Modality", "Unknown"),
+                "Institution": dicom_img.get("InstitutionName", "Unknown"),
+                "Rows": dicom_img.get("Rows", "Unknown"),
+                "Columns": dicom_img.get("Columns", "Unknown"),
+                "Pixel Spacing": dicom_img.get("PixelSpacing", "Unknown"),
+                "Slice Thickness": dicom_img.get("SliceThickness", "Unknown"),
+            }
+            
+            metadata_list.append(metadata)
+
+    return metadata_list  # Returns metadata for all slices
+
 
 def save_segmented_image(image, filename):
     """Saves segmented image as PNG."""

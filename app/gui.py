@@ -13,7 +13,7 @@ class XRayViewer(QWidget):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle('XIMED Medical Imaging Tool')
+        self.setWindowTitle('Medical Imaging Tool')
         self.setGeometry(100, 100, 600, 500)
 
         self.label = QLabel("Upload a DICOM Image or Series", self)
@@ -108,7 +108,7 @@ class XRayViewer(QWidget):
         render_window.AddRenderer(renderer)
 
         render_window.SetSize(1200, 800)
-        render_window.SetWindowName("XIMED 3D Medical Viewer")
+        render_window.SetWindowName("3D Medical Viewer")
 
         interactor = vtk.vtkRenderWindowInteractor()
         interactor.SetRenderWindow(render_window)

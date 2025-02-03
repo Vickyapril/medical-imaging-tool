@@ -23,7 +23,7 @@ GitHub Actions (CI/CD)
 ---
 
 ## 🎥 Demo Video  
-[Click here to watch the demo video](https://github.com/Vickyapril/medical-imaging-tool/blob/main/docs/demo.mp4?raw=true)
+[Click here to watch the demo video](https://youtu.be/wu7jF-NP5oQ)
 
 ## 📷 **Screenshots**
 **DICOM Image Viewer:**  
